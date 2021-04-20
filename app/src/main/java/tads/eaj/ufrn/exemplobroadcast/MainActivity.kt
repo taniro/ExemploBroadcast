@@ -18,6 +18,7 @@ import tads.eaj.ufrn.exemplobroadcast.PermissionUtils.Companion.alertAndFinish
 class MainActivity : AppCompatActivity() {
 
     var meu_receiver: BroadcastReceiver = ReceiverDinamico()
+    var battery_receiver : BroadcastReceiver = ReceiverBateria()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         LocalBroadcastManager.getInstance(this).registerReceiver(meu_receiver, IntentFilter("BANG"))
+        registerReceiver(battery_receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
 
         // Solicita as permissões
         PermissionUtils.validate(this, 0, READ_SMS, READ_PHONE_STATE,RECEIVE_SMS)
